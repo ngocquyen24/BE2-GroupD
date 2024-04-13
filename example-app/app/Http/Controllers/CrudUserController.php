@@ -96,7 +96,10 @@ class CrudUserController extends Controller
      */
     public function updateUser(Request $request)
     {
+<<<<<<< HEAD
         //tim user theo id
+=======
+>>>>>>> list
         $user_id = $request->get('id');
         $user = User::find($user_id);
 
@@ -114,16 +117,21 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
+<<<<<<< HEAD
             'phone' => 'required|min:10',
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
        
 
+=======
+        ]);
+>>>>>>> list
 
        $user = User::find($input['id']);
        $user->name = $input['name'];
        $user->email = $input['email'];
        $user->password = $input['password'];
+<<<<<<< HEAD
        $user->phone = $input['phone'];
           //Kiem tra tep tin co truong du lieu avatar hay kh
           if($request->hasFile('avatar')){
@@ -156,13 +164,27 @@ class CrudUserController extends Controller
         }
     }
     /**
+=======
+       $user->save();
+
+        return redirect("list")->withSuccess('You have signed-in');
+    }
+
+   /**
+>>>>>>> list
      * List of users
      */
     public function listUser()
     {
         if(Auth::check()){
+<<<<<<< HEAD
             $users = User::all();
             return view('crud_user.list', ['users' => $users]);
+=======
+            // $users = User::all();//Lay tat ca du lieu trong ban user
+            $users = User::paginate(10);
+            return view('crud_user.list', ['users' => $users]);//->with('i',(request()->input('page',1)-1)*2);
+>>>>>>> list
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');
