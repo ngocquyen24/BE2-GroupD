@@ -68,4 +68,5 @@
             <div style="text-align: center;" class="link">{{ $users->links() }}</div>
         </div>
     </main>
+    
 @endsection

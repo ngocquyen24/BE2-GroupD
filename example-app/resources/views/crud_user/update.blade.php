@@ -8,17 +8,10 @@
                     <div class="card">
                         <h3 class="card-header text-center">Update User</h3>
                         <div class="card-body">
-
-                            <form action="{{ route('user.postUpdateUser') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <input name="id" type="hidden" value="{{$user->id}}">
-                                <!-- <div class="form-group mb-3">
-
                             <form action="{{ route('user.postUpdateUser') }}" method="POST">
                                 @csrf
                                 <input name="id" type="hidden" value="{{$user->id}}">
                                 <div class="form-group mb-3">
-
                                     <input type="text" placeholder="Name" id="name" class="form-control" name="name"
                                            value="{{ $user->name }}"
                                            required autofocus>
