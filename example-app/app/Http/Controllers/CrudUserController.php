@@ -28,11 +28,11 @@ class CrudUserController extends Controller
     public function authUser(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('name', 'password');
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             return redirect()->intended('list')
@@ -55,22 +55,38 @@ class CrudUserController extends Controller
      */
     public function postUser(Request $request)
     {
+        //kiem tra du lieu  dau vao
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'phone' => 'required|min:10',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+           
         ]);
+         //Kiem tra tep tin co truong du lieu avatar hay kh
+         if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();//Lay ten mo rong .jpg, .png...
+            $filename = time().'.'.$extension;//
+            $file->move('avatar/',$filename) ;  //upload len thu muc avatar trong piblic
+        }
 
+        //Lay tat ca co so du lieu gan vao mang data
         $data = $request->all();
+        
         $check = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
+            'avatar' => $filename ?? NULL,
+            // 'avatar' => $avatarName ?? NULL,
+
         ]);
 
         return redirect("login");
     }
-
     /**
      * View user detail page
      */
@@ -96,10 +112,6 @@ class CrudUserController extends Controller
      */
     public function updateUser(Request $request)
     {
-<<<<<<< HEAD
-        //tim user theo id
-=======
->>>>>>> list
         $user_id = $request->get('id');
         $user = User::find($user_id);
 
@@ -117,74 +129,25 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
-<<<<<<< HEAD
-            'phone' => 'required|min:10',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-       
-
-=======
-        ]);
->>>>>>> list
 
        $user = User::find($input['id']);
        $user->name = $input['name'];
        $user->email = $input['email'];
        $user->password = $input['password'];
-<<<<<<< HEAD
-       $user->phone = $input['phone'];
-          //Kiem tra tep tin co truong du lieu avatar hay kh
-          if($request->hasFile('avatar')){
-           
-            //co file dinh kem trong form update thi tim file cu va xoa di
-            //Neu $anhcu ton tai thi xoa no di , neu kh co thi kh xoa
-            $anhcu = 'avatar/' . $user->avatar;
-            if(File::exists($anhcu)){
-                File::delete($anhcu);
-            }
-           
-            $file = $request->file('avatar');
-            $extension = $file->getClientOriginalExtension();//Lay ten mo rong .jpg, .png...
-            $filename = time().'.'.$extension;//
-            $file->move('avatar/',$filename) ;  //upload len thu muc avatar trong piblic
-        }
-        $user->avatar = $filename;
-        
-
-        try {
-            $user->update();
-    
-            return redirect('dashboard')->with('success', 'User updated successfully.');
-        } catch (\Exception $e) {
-            if ($e instanceof \Illuminate\Database\QueryException && $e->errorInfo[1] == 1062) {
-                return redirect()->back()->withErrors(['email' => 'The email address is already taken.'])->withInput();
-            }
-    
-            return redirect()->back()->withErrors(['error' => 'An error occurred while updating the user. Please try again.'])->withInput();
-        }
-    }
-    /**
-=======
        $user->save();
 
         return redirect("list")->withSuccess('You have signed-in');
     }
 
-   /**
->>>>>>> list
+    /**
      * List of users
      */
     public function listUser()
     {
         if(Auth::check()){
-<<<<<<< HEAD
             $users = User::all();
             return view('crud_user.list', ['users' => $users]);
-=======
-            // $users = User::all();//Lay tat ca du lieu trong ban user
-            $users = User::paginate(10);
-            return view('crud_user.list', ['users' => $users]);//->with('i',(request()->input('page',1)-1)*2);
->>>>>>> list
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');
@@ -199,3 +162,4 @@ class CrudUserController extends Controller
 
         return Redirect('login');
     }
+}
