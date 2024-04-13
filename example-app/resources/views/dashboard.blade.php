@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Laravel 10.48.0 - CRUD User Example</title>

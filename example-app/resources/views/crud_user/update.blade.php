@@ -1,11 +1,5 @@
 @extends('dashboard')
-<<<<<<< HEAD
-<style>
-  
-</style>
-=======
 
->>>>>>> list
 @section('content')
     <main class="signup-form">
         <div class="cotainer">
@@ -14,17 +8,17 @@
                     <div class="card">
                         <h3 class="card-header text-center">Update User</h3>
                         <div class="card-body">
-<<<<<<< HEAD
+
                             <form action="{{ route('user.postUpdateUser') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input name="id" type="hidden" value="{{$user->id}}">
                                 <!-- <div class="form-group mb-3">
-=======
+
                             <form action="{{ route('user.postUpdateUser') }}" method="POST">
                                 @csrf
                                 <input name="id" type="hidden" value="{{$user->id}}">
                                 <div class="form-group mb-3">
->>>>>>> list
+
                                     <input type="text" placeholder="Name" id="name" class="form-control" name="name"
                                            value="{{ $user->name }}"
                                            required autofocus>
@@ -47,7 +41,7 @@
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
-<<<<<<< HEAD
+
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="Phone" id="phone" class="form-control" name="phone"  value="{{ $user->phone }}" required>
                                     @if ($errors->has('phone'))
@@ -127,14 +121,14 @@
                         <!-- <div class="d-grid mx-auto">
                             <a href="{{route('user.list')}}" class="btn btn-dark btn-block">Back</a>
                       </div> -->
-=======
+
 
                                 <div class="d-grid mx-auto">
                                     <button type="submit" class="btn btn-dark btn-block">Update</button>
                                 </div>
                             </form>
                         </div>
->>>>>>> list
+
                     </div>
                 </div>
             </div>

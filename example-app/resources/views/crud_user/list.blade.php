@@ -1,8 +1,4 @@
 @extends('dashboard')
-<<<<<<< HEAD
-
-@section('content')
-=======
 <style>
     .danhSach{
         text-align: center;
@@ -37,40 +33,23 @@
 </style>
 @section('content')
 <h5 class="danhSach">Danh sách user</h5>
->>>>>>> list
     <main class="login-form">
         <div class="container">
             <div class="row justify-content-center">
                 <table>
                     <thead>
                         <tr>
-<<<<<<< HEAD
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Action</th>
-=======
                             <th>#</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Avatar</th>
                             <th>Thao tác</th>
->>>>>>> list
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($users as $user)
                             <tr>
-<<<<<<< HEAD
-                                <th>{{ $user->id }}</th>
-                                <th>{{ $user->name }}</th>
-                                <th>{{ $user->email }}</th>
-                                <th>
-                                    <a href="{{ route('user.readUser', ['id' => $user->id]) }}">View</a> |
-                                    <a href="{{ route('user.updateUser', ['id' => $user->id]) }}">Edit</a> |
-                                    <a href="{{ route('user.deleteUser', ['id' => $user->id]) }}">Delete</a>
-=======
                                 <th style="text-align: center;">{{ $user->id }}</th>
                                 <th>{{ $user->name }}</th>
                                 <th>{{ $user->email }}</th>                               
@@ -80,17 +59,13 @@
                                     <a href="{{ route('user.readUser', ['id' => $user->id]) }}"   >View</a> |
                                     <a href="{{ route('user.updateUser', ['id' => $user->id]) }}" >Edit</a> |
                                     <a href="{{ route('user.deleteUser', ['id' => $user->id]) }}" >Delete</a> 
->>>>>>> list
                                 </th>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-<<<<<<< HEAD
-=======
             <div style="text-align: center;" class="link">{{ $users->links() }}</div>
->>>>>>> list
         </div>
     </main>
 @endsection
